@@ -137,6 +137,7 @@ class SignUpActivity : AppCompatActivity(),View.OnClickListener,
         }
     }
 
+    // To validate the user
     private fun validateUser(name: String, password: String, selectedCountry: String) {
         if (validateName(name) && validatePassword(password)) {
 
@@ -145,7 +146,6 @@ class SignUpActivity : AppCompatActivity(),View.OnClickListener,
             finish()
         } else {
             // Display appropriate error messages for invalid input
-            // Implement your error handling here
             Toast.makeText(this, "PLEASE PROVIDE APPROPRIATE PASSWORD", Toast.LENGTH_LONG).show()
             mBinding.etName.text = null
             mBinding.etPassword.text = null
@@ -154,6 +154,7 @@ class SignUpActivity : AppCompatActivity(),View.OnClickListener,
         }
     }
 
+    // once user select the country
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
         if (position > 0) {
             // User selected a country, show the TextView
@@ -169,12 +170,15 @@ class SignUpActivity : AppCompatActivity(),View.OnClickListener,
         }
     }
 
+    // if no country is selected
     override fun onNothingSelected(p0: AdapterView<*>?) {
         mBinding.etName.visibility = View.GONE
         mBinding.etPassword.visibility = View.GONE
         mBinding.btnSignUp.visibility = View.GONE
     }
 
+
+    // To update the sign-up button state
     private fun updateSignUpButtonState() {
         val nameNotEmpty = mBinding.etName.text.toString().isNotEmpty()
         val passwordNotEmpty = mBinding.etPassword.text.toString().isNotEmpty()
