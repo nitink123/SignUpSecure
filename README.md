@@ -1,8 +1,9 @@
 # SignUpSecure
 // First select the county by dropdown the spinner.
 
-The name, password, and sign-in button will only be visible, once you select the country.
+//The name, password, and sign-in button will only be visible, once you select the country.
 
+// sign-in button will only be enable when name and password text is not empty
 Once the name, password, and sign-in button are visible, add your credentials. 
 
 the name should only have characters
