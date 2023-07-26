@@ -3,6 +3,8 @@ package com.example.signupsecure
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -35,10 +37,40 @@ class SignUpActivity : AppCompatActivity(),View.OnClickListener,
         mBinding.spinnerCountries.onItemSelectedListener = this
 
 
+
+
+        // Set up text change listeners and initial button state
+        setUpTextChangeListeners()
+        updateSignUpButtonState()
+
+
+
+    }
+
+    private fun setUpTextChangeListeners() {
+        mBinding.etName.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                updateSignUpButtonState()
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        mBinding.etPassword.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                updateSignUpButtonState()
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
     }
 
 
-   // To validate the password For password, min 8 characters with atleast
+    // To validate the password For password, min 8 characters with atleast
    //one number, special characters[!@#$%&()], one lowercase letter, and one uppercase letter is
    //mandatory
     private fun validatePassword(password: String): Boolean {
@@ -141,6 +173,12 @@ class SignUpActivity : AppCompatActivity(),View.OnClickListener,
         mBinding.etName.visibility = View.GONE
         mBinding.etPassword.visibility = View.GONE
         mBinding.btnSignUp.visibility = View.GONE
+    }
+
+    private fun updateSignUpButtonState() {
+        val nameNotEmpty = mBinding.etName.text.toString().isNotEmpty()
+        val passwordNotEmpty = mBinding.etPassword.text.toString().isNotEmpty()
+        mBinding.btnSignUp.isEnabled = nameNotEmpty && passwordNotEmpty
     }
 
 
